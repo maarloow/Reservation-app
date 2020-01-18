@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <!--<link rel="stylesheet" href="css/VIRIGO.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/Customer.js"></script>
+    <script src="js/app.js"></script>
+       <title class="title">Car reservation</title>
+</head>
+
+<body class="ui-body-d">
+    <div data-role="page"  id="page1">
+        <div data-role="header">
+            <h1>Car reservation app</h1>
+        </div>
+        <div >
+            <ul class="menu main-menu">
+                <a class="main-menu__link" href="#page4" id="button-page4"> 
+                    <li class="menu__item">MAKE CAR RESERVATION</li class="menu__item">
+                    <img src="img/license.svg" alt="" class="svg">
+                    </a>
+                    <a class="main-menu__link" href="#page2" id="button-page2">
+                        <li class="menu__item">ADD NEW CAR</li class="menu__item">
+                        <img src="img/car.svg" alt="" class="svg">
+                        </a>
+                        <a class="main-menu__link" href="#page3" id="button-page3">
+                            <li class="menu__item">ADD CUSTOMER</li class="menu__item">
+                            <img src="img/add.svg" alt="" class="svg">
+                            </a>
+            </ul>
+        </div>
+    </div>
+    <div data-role="page" id="page2">
+        <div class="header">
+            <h1>Add new car</h1>
+        </div>
+        <div class="content">
+
+            <form class="form" id="carForm">
+                <label for="registration">Registration:</label>
+                <input type="text" name="registration" id="registration"  required />
+                <label for="make">Make:</label>
+                <input type="text" name="make" id="make" required />
+                <label for="model">Model:</label>
+                <input type="text" name="model" id="model" required />
+                <label for="engineSize">Engine size:</label>
+                <input type="number" name="engineSize" id="engineSize" required />
+                <label for="color">Color:</label>
+                <input type="text" name="color" id="color" required />
+                <label for="numberOfSeats">Number of seats:</label>
+                <input type="number" name="numberOfSeats" id="numberOfSeats" required />
+                <label for="numberOfDoors">Number of doors</label>
+                <input type="number" name="numberOfDoors" id="numberOfDoors" required />
+                <label for="dailyRate">Daily rate</label>
+                <input type="number" name="dailyRate" id="dailyRate" required />
+
+                <input type="submit" value="Add car" id="addCar" />
+            </form>
+        <button><a class="back-btn">Back</a></button>
+
+            </ul>
+        </div>
+    </div>
+    <div data-role="page" class="" id="page3">
+        <div class="header">
+            <h2 class="">Add customer</h2>
+        </div>
+        <div class="content " >
+            <h2 class="page-header">ADD CUSTOMER</h2>
+            <form action="" id="customerForm" class="form ">
+                <div class="form-block">
+                <label for="fName">First Name:</label>
+                <input type="text" name="fName" id="fName" required />
+                </div>
+                <div class="form-block">
+                <label for="lName">Last Name:</label>
+                <input type="text" name="lName" id="lName"  required />
+            </div>
+                <div class="form-block">
+                <label for="birthDate">Date of birth:</label>
+                <input type="date" name="birthDate" id="birthDate"  required />
+            </div>
+                <div class="form-block">
+                <label for="city">City:</label>
+                <input type="text" name="city" id="city"  required />
+            </div>
+                <div class="form-block">
+                <label for="adress">Adress:</label>
+                <input type="text" class="" name="adress" id="adress"  required />
+            </div>
+                <div class="form-block">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email"  required />
+            </div>
+                <div class="form-block">
+                <label for="phone">Phone:</label>
+                <input type="number" name="phone" id="phone"  required />
+            </div>
+                <input type="submit" value="Add customer" id="addCustomer"  >
+
+            </form>
+
+            </ul>
+        <button class="btn"><a class="back-btn" data-rel="back-btn" class="back">Back</a></button>
+
+        </div>
+    </div>
+    <div data-role="page" class="" id="page4">
+        <div class="header">
+            <button class="btn"><a href="#" class="back-btn">Back</a></button>
+            <h1>Car reservation</h1>
+        </div>
+        <div class="content">
+
+            <form class="form "  id="carRentForm">
+                <div class="date-box form-chapter">
+                <h2>Date</h2>
+                <label for="fromDate">From:</label>
+                <input type="date" name="fromDate" id="fromDate"  required />
+                <label for="toDate">To:</label>
+                <input type="date" name="toDate" id="toDate" required />
+            </div>
+                <!-- Choose a car -->
+                <div class="car-box form-chapter">
+                    <h2>Car</h2>
+                    <div class="form-block">
+                            <label class="form-block__c" for="carName">Car: </label>
+                            <input  class="form-block__c" type="text" name="carName" id="carName" value="" />
+                    </div>
+                    <input class="btn" type="button" value="Search" id="search_car">
+                    <div class="form-block">
+                    <label for="chosenCar">Rent: </label>
+                    <input type="text" class="readonly" name="chosenCar" id="chosenCar" placeholder="search for a car above" value="" required >
+                </div>
+                            <!-- search results-->
+                    <h3 id="carResultRows"></h3>
+                    <div id="carTable">
+
+                    </div>
+
+                    <!-- print out added cars-->
+                    <div class="add-customer">
+
+                    </div>
+                    <!-- <table data-role="table" id="table-cars" data-mode="columntoggle"
+                        class="ui-responsive table-stroke">
+                        <thead>
+                            <tr>
+                                <th>Car</th>
+                                <th data-priority="2" id="">Registration</th>
+                                <th data-priority="3" id="" >Daily rate</th>
+                                <th data-priority="4">Seating</th>
+                                <th data-priority="5">Doors</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-car__rows">
+
+
+
+                        </tbody>
+                    </table> -->
+
+                </div>
+
+                <div class="customer-box form-chapter">
+                    <h2>Customer</h2>
+
+                    <h3>Search existing</h3>
+                    <div class="form-block">
+                        <label class="form-block__c" for="firstName">First name: </label>
+                        <input class=" form-block__c" type="text" name="firstName" id="firstName" value="" />
+                    </div>
+                    <div class="form-block">
+                        <label class="form-block__c" for="lasttName">Last name: </label>
+                        <input class=" form-block__c" type="text" name="lastName" id="lastName" value="" />
+                    </div>
+                    <div class="form-block">
+                        <input class="form-block__c btn" type="button" value="Add new">
+                        <h2>or</h2>
+                        <input class="form-block__c btn" type="button" value="Search" id="search_customer">
+                    </div>
+                    <div class="form-block">
+                            <label for="chosenCustomer">Customer: </label>
+                            <input type="text" class="readonly" name="chosenCustomer" id="chosenCustomer" placeholder="search for a customer above" required>
+                        </div>
+
+                    <!-- List all matching customers here-->
+
+                    <h3 id="customerResultRows"></h3>
+                    <div id="customerTable">
+
+                    </div>
+                    <!-- print out added customers-->
+                    <div class="added-customers">
+
+                        </div>
+                </div>
+                <div class="form-chapter">
+                    <h2>Milage options</h2>
+                    <div class="form-block">
+                    <label for="milage">Milage: </label>
+                    <input type="number" name="milage" id="milage" placeholder="optional">
+                </div>
+                </div>
+                <input type="submit" value="Commit" class="btn" id="commit-car-reservation" />
+            </form>
+            <button class="btn"><a class="back-btn" data-rel="back">Back</a></button>
+
+            </ul>
+        </div>
+    </div>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+
+</body>
+
+</html>
