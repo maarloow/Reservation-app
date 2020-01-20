@@ -47,7 +47,7 @@ body {
 }
 
 body{
-    background-color: #fff;
+    background-color: #464646;
     
 }
 
@@ -129,6 +129,12 @@ align-items: center;
  justify-content: space-between;
  font-weight: 200;
  margin: 10px;
+ color: #DBDBDB;
+ font-size: 18px;
+}
+
+.form-group{
+    margin-bottom: 30px;
 }
 
 .form-block__c input{
@@ -168,11 +174,13 @@ align-items: center;
     margin: 10px 0px;
 }
 input{
-    border-radius: 20px !important;
+    border-radius: 10px ;
+    margin-right: 20px;
+
 }
 .ui-input-text{
-    border:none !important;
-    background-color: transparent !important;
+    border:none ;
+    background-color: transparent ;
 }
 
 .page-header{
@@ -180,10 +188,18 @@ input{
     border: 0;
     font-size: 20px;
     font-weight: normal;
+    text-align: center;
+    color: #D2C166;
 }
 
+.header{
+    height: 25px;
+}
 .form{
     border: none;
+    background-color: #8E969D;
+    border-radius: 10px;
+    padding: 30px 20px;
 }
 
 .add-car, .add-customer{
@@ -278,8 +294,11 @@ input{
 }
 
 input{
-    background-color: white;
+    background-color: #C4C4C4;
     height: 25px;
+    color: #DBDBDB;
+    border: none;
+
 }
 
 .content{
@@ -287,10 +306,41 @@ input{
 }
 
 .btn{
+    padding: 0 20px;
     text-decoration: none;
     background-color: white;
-    border: 1px solid black;
+    border: 2px solid;
     border-radius: 20px;
+    font-size: 40px;
+    height: auto;
+    background-color: transparent;
+    color: #DBDBDB;
+}
+
+.btn-form{
+    font-size: 23px;
+}
+.requirements{
+    margin: 20px 0;
+}
+
+.requirements__requirement{
+    display: inline-block;
+    background-color: #8E969D;
+    color: #DBDBDB;
+    padding: 3px;
+    border-radius: 10px;
+    margin: 2px 4px;
+    font-size: 14px;
+}
+
+#remove{
+    color: #3E3E3E;
+    font-size: 11px;
+}
+
+.u-inline-block{
+    display: inline;
 }
 
 .car{
@@ -298,7 +348,7 @@ input{
     flex-direction: row;
     padding-left: 10px;
     align-items: center;
-    background-color: rgba(206, 206, 206, 0.24);
+    background-color: #8E969D;
     margin-bottom: 15px;
 }
 
@@ -313,10 +363,12 @@ input{
 .car__info-header{
     font-size: 25px;
     margin-bottom: 30px;
+    color: #D2C166;
 }
 
 .car__info-price{
     font-size: 15px;
+    color: #DBDBDB;
 }
 .car__image-box{
     height: 100%;
@@ -338,4 +390,54 @@ input{
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 15px;
+}
+
+.back-btn__icon{
+    width: 40px;
+    margin: 10px;
+}
+
+.car-card__image-box{
+
+}
+
+.car-card__img{
+    width: 100%;
+}
+
+.car-card__price-box{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.car-card__price{
+    font-size: 30px;
+    color: #DBDBDB;
+}
+
+.car-card__info{
+    width: 33.3%;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.car-card__button-box{
+    text-align: center;
+}
+.car-card__icon{
+    width: 50%;
+    color: white;
+}
+
+.car-card__info-box{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.car-card__text{
+    color: #DBDBDB;
+}
+
+.filter-white{
+    filter: invert(98%) sepia(0%) saturate(5261%) hue-rotate(250deg) brightness(120%) contrast(72%);
 }
