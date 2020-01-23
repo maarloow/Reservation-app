@@ -1,0 +1,31 @@
+.back-btn__icon{
+    width: 40px;
+    margin: 10px;
+}
+
+.btn-form{
+    font-size: 23px;
+}
+.btn{
+    padding: 0 20px;
+    text-decoration: none;
+    background-color: white;
+    border: 2px solid;
+    border-radius: 20px;
+    font-size: 40px;
+    height: auto;
+    background-color: transparent;
+    color: #DBDBDB;
+}
+
+
+.add-car, .add-customer{
+    background-color:rgba(4, 28, 241, 0.54);
+    color: white;
+    border: 1px solid white;
+    
+}
+.add-car:hover, .add-customer:hover{
+    background-color:rgba(4, 28, 241, 0.11);
+
+}

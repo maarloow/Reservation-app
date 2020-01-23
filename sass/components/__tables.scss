@@ -1,0 +1,18 @@
+#table-customers{
+    overflow-y: scroll;
+    overflow-x: scroll;
+    max-height: 100px;
+    display: block;
+}
+
+#table-cars{
+    overflow-y: scroll;
+    overflow-x: scroll;
+    max-height: 100px;
+    display: block;
+}
+
+#table-car__rows, #table-customer__rows td{
+    padding: 4px;
+    text-align: center;
+}
