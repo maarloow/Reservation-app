@@ -12,7 +12,7 @@ function customer(firstName, lastName, dateOfBirth, city, adress, email, phone) 
   return customer;
 }
 
-function car(registration, make, model, engineSize, color, numberOfSeats, numberOfDoors, dailyRate) {
+function car(registration, make, model, engineSize, color, numberOfSeats, numberOfDoors, dailyRate, imageSide, imageFront) {
     let car = {
         registration : registration,
         make : make,
@@ -21,7 +21,9 @@ function car(registration, make, model, engineSize, color, numberOfSeats, number
         color : color,
         numberOfSeats : numberOfSeats,
         numberOfDoors : numberOfDoors,
-        dailyRate : dailyRate
+        dailyRate : dailyRate,
+        imageSide : imageSide,
+        imageFront : imageFront
     };
   return car;
 }

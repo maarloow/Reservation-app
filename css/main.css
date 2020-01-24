@@ -85,6 +85,10 @@
   background-color: rgba(4, 28, 241, 0.11);
 }
 
+#button-page4 {
+  background-image: url("../img/contract.jpg");
+}
+
 .form-block {
   display: flex;
   width: 100%;

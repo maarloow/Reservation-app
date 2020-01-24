@@ -52,16 +52,22 @@
         <div>
             <ul class="menu main-menu">
                 <a class="main-menu__link" href="#page4" id="button-page4">
-                    <li class="menu__item">MAKE CAR RESERVATION</li class="menu__item">
-                    <img src="img/license.svg" alt="" class="svg">
+                    <div class="ui-dark-lens">
+                        <li class="menu__item">MAKE CAR RESERVATION</li class="menu__item">
+                       
+                    </div>
                 </a>
                 <a class="main-menu__link" href="#page2" id="button-page2">
+                    <div class="ui-dark-lens">
                     <li class="menu__item">ADD NEW CAR</li class="menu__item">
-                    <img src="img/car.svg" alt="" class="svg">
+                  
+                </div>
                 </a>
                 <a class="main-menu__link" href="#page3" id="button-page3">
+                    <div class="ui-dark-lens">
                     <li class="menu__item">ADD CUSTOMER</li class="menu__item">
-                    <img src="img/add.svg" alt="" class="svg">
+                
+                </div>
                 </a>
             </ul>
         </div>
@@ -82,25 +88,25 @@
                 <div class="form-group">
                     <div class="form-block">
                         <h2>Car</h2>
-                        </div>
-                        <div class="form-block">
-                            <label for="registration">Reg.</label>
-                            <input type="text" name="registration" id="registration" required />
-                        </div>
+                    </div>
                     <div class="form-block">
-                    <label for="make">Make:</label>
-                    <input type="text" name="make" id="make" required />
-                </div>
-                <div class="form-block">
-                    <label for="model">Model:</label>
-                    <input type="text" name="model" id="model" required />
-                </div>
+                        <label for="registration">Reg.</label>
+                        <input type="text" name="registration" id="registration" required />
+                    </div>
+                    <div class="form-block">
+                        <label for="make">Make:</label>
+                        <input type="text" name="make" id="make" required />
+                    </div>
+                    <div class="form-block">
+                        <label for="model">Model:</label>
+                        <input type="text" name="model" id="model" required />
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <div class="form-block">
                         <h2>Car info</h2>
-                        </div>
+                    </div>
                     <div class="form-block">
                         <label for="engineSize">Engine size</label>
                         <input type="number" name="engineSize" id="engineSize" required />
@@ -121,6 +127,16 @@
                         <label for="dailyRate">Daily rate</label>
                         <input type="number" name="dailyRate" id="dailyRate" required />
                     </div>
+
+                    <div class="form-block">
+                        <label for="sideImage">Side image</label>
+                        <input type="text" name="sideImage" id="imageSide" placeholder="Image file name" required />
+                    </div>
+                    <div class="form-block">
+                        <label for="frontImage">Front image</label>
+                        <input type="text" name="frontImage" id="imageFront" placeholder="Image file name" required />
+                    </div>
+
                 </div>
 
                 <input type="submit" class="btn" value="Add car" id="addCar" />
@@ -143,45 +159,45 @@
             <h2 class="page-header">ADD CUSTOMER</h2>
             <form action="" id="customerForm" class="form ">
                 <div class="form-group">
-                <div class="form-block">
-                    <label for="fName">First Name</label>
-                    <input type="text" name="fName" id="fName" required />
-                </div>
-                <div class="form-block">
-                    <label for="lName">Last Name</label>
-                    <input type="text" name="lName" id="lName" required />
-                </div>
-                <div class="form-block">
-                    <label for="birthDate">Birth:</label>
-                    <input type="date" name="birthDate" id="birthDate" required />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-block">
-                <h2>Adress</h2>
-                </div>
-                <div class="form-block">
-                    <label for="city">City</label>
-                    <input type="text" name="city" id="city" required />
-                </div>
-                <div class="form-block">
-                    <label for="adress">Street</label>
-                    <input type="text" class="" name="adress" id="adress" required />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-block">
-                    <h2>Contact</h2>
+                    <div class="form-block">
+                        <label for="fName">First Name</label>
+                        <input type="text" name="fName" id="fName" required />
                     </div>
-                <div class="form-block">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" required />
+                    <div class="form-block">
+                        <label for="lName">Last Name</label>
+                        <input type="text" name="lName" id="lName" required />
+                    </div>
+                    <div class="form-block">
+                        <label for="birthDate">Birth:</label>
+                        <input type="date" name="birthDate" id="birthDate" required />
+                    </div>
                 </div>
-                <div class="form-block">
-                    <label for="phone">Phone</label>
-                    <input type="number" name="phone" id="phone" required />
+                <div class="form-group">
+                    <div class="form-block">
+                        <h2>Adress</h2>
+                    </div>
+                    <div class="form-block">
+                        <label for="city">City</label>
+                        <input type="text" name="city" id="city" required />
+                    </div>
+                    <div class="form-block">
+                        <label for="adress">Street</label>
+                        <input type="text" class="" name="adress" id="adress" required />
+                    </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <div class="form-block">
+                        <h2>Contact</h2>
+                    </div>
+                    <div class="form-block">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" required />
+                    </div>
+                    <div class="form-block">
+                        <label for="phone">Phone</label>
+                        <input type="number" name="phone" id="phone" required />
+                    </div>
+                </div>
                 <input type="submit" class="btn" value="Add customer" id="addCustomer">
 
             </form>
@@ -212,7 +228,7 @@
                     </div>
                     <div class="form-block">
                         <label for="toDate">To:</label>
-                        <input type="date" name="toDate" id="toDate" required /> 
+                        <input type="date" name="toDate" id="toDate" required />
                     </div>
                 </div>
                 <div class="form-group">
@@ -232,8 +248,8 @@
                 <!-- Choose a car -->
                 <div class="form-group">
                     <div class="form-block">
-                    <h2>Car</h2>
-                </div>
+                        <h2>Car</h2>
+                    </div>
                     <div class="form-block">
                         <label class="form-block__c" for="carName">Car: </label>
                         <input class="form-block__c" type="text" name="carName" id="carName" value="" />
@@ -274,7 +290,7 @@
                     </table> -->
 
                 </div>
-<!--
+                <!--
                 <div class="customer-box form-chapter">
                     <h2>Customer</h2>
 
@@ -310,7 +326,7 @@
                     </div>
                 </div>
                 -->
-                
+
                 <div class="form-group">
                     <div class="form-block">
                         <h2>Milage options</h2>

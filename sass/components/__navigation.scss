@@ -10,8 +10,10 @@
 .menu__item{
 
     list-style-type: none;
-    margin: 10px 0;
-    font-size: 18px;
+    font-size: 25px;
+    text-align: center;
+    height: 100%;
+    //transform: translate(0%, 45%);
 }
 
 .menu__item-link{
@@ -25,17 +27,17 @@
 
 .main-menu__link{
     text-decoration: none;
-    color: black;
+    color: white;
     font-size: 22px;
     display: flex;
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
-    margin: 10px;
+    //margin: 10px;
     height: 100px;
     width: 90%;
     background-color: lightblue;
-    padding: 0 10px;
+   
 
 }
 
@@ -48,7 +50,7 @@
     font-size: 45px;
     text-align: center;
     font-weight: bold;
-    background-color: rgba(0, 0, 0, 0.301);
+    //background-color: rgba(0, 0, 0, 0.301);
 }
 
 #car-link{

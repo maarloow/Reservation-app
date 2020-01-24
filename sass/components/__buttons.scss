@@ -3,9 +3,7 @@
     margin: 10px;
 }
 
-.btn-form{
-    font-size: 23px;
-}
+
 .btn{
     padding: 0 20px;
     text-decoration: none;
@@ -17,7 +15,9 @@
     background-color: transparent;
     color: #DBDBDB;
 }
-
+.btn-form{
+    font-size: 23px;
+}
 
 .add-car, .add-customer{
     background-color:rgba(4, 28, 241, 0.54);
@@ -29,3 +29,25 @@
     background-color:rgba(4, 28, 241, 0.11);
 
 }
+
+#button-page4, #button-page3, #button-page2{
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 200px;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.829);
+}
+
+#button-page4{
+    background-image: url("../img/contract.jpg");
+}
+   
+#button-page2{
+    background-image: url("../img/addcustomer.jpg");
+
+}
+#button-page3{
+    background-image: url("../img/addcar.jpg");
+
+}
+//da
