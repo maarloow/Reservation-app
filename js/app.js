@@ -94,70 +94,70 @@ $(function () {
                 });
             });
 
-            $(".back-btn").bind('click', function(e){
+            $(".back-btn").bind('click', function (e) {
                 app.hideAllPages();
                 $("#page1").css("display", "block");
             });
 
-            $("#button-page2").bind('click', function(e) {
+            $("#button-page2").bind('click', function (e) {
                 app.hideAllPages();
                 $("#page2").css("display", "block");
             });
 
-            $("#button-page3").bind('click', function(e) {
+            $("#button-page3").bind('click', function (e) {
                 app.hideAllPages();
                 $("#page3").css("display", "block");
             });
 
-            $("#button-page4").bind('click', function(e) {
+            $("#button-page4").bind('click', function (e) {
                 app.hideAllPages();
                 $("#page4").css("display", "block");
             });
         };
 
         app.db = function () {
-            
-            var db = openDatabase('reservation.db', '1.3', 'description', 1 * 1024 * 1024, () => {
+
+
+            var db = openDatabase('rentaltest.db', '1.0', 'description', 1 * 1024 * 1024, () => {
                 //Runs if a database had to be created
 
+                //Create tables
+                let sqlCreateCustomerTable = 'CREATE TABLE Customers (\
+    customer_id INTEGER PRIMARY KEY AUTOINCREMENT,\
+    first_name TEXT NOT NULL,\
+    last_name TEXT NOT NULL,\
+    date_of_birth DATE NOT NULL,\
+    city TEXT NOT NULL,\
+    adress TEXT NOT NULL,\
+    email TEXT,\
+    phone INTEGER NOT NULL\
+);';
 
-                
+                let sqlCreateCarTable = 'CREATE TABLE Cars (\
+    registration TEXT PRIMARY KEY,\
+    make TEXT NOT NULL,\
+    model TEXT NOT NULL,\
+    engine_size TEXT NOT NULL,\
+    color TEXT NOT NULL,\
+    number_of_seats INTEGER NOT NULL,\
+    number_of_doors INTEGER NOT NULL,\
+    daily_rate DECIMAL(10,2) NOT NULL,\
+    image_side TEXT,\
+    image_front TEXT\
+);';
+
+                db.transaction(function (tx) {
+                    //Create customer table if it does not exist
+                    tx.executeSql(sqlCreateCustomerTable, [], () => console.log("created customer table"), (err, error) => console.log(error));
+                    tx.executeSql(sqlCreateCarTable, [], () => console.log("created car table"), (err, error) => console.log(error));
+                });
+
                 console.log("Database created");
             });
-                            //Create tables
-                            let sqlCreateCustomerTable = 'CREATE TABLE IF NOT EXISTS Customers (\
-                                customer_id INTEGER PRIMARY KEY AUTOINCREMENT,\
-                                first_name TEXT NOT NULL,\
-                                last_name TEXT NOT NULL,\
-                                date_of_birth DATE NOT NULL,\
-                                city TEXT NOT NULL,\
-                                adress TEXT NOT NULL,\
-                                email TEXT,\
-                                phone INTEGER NOT NULL\
-                            );';
-            
-                            let sqlCreateCarTable = 'CREATE TABLE IF NOT EXISTS Cars (\
-                                registration TEXT PRIMARY KEY,\
-                                make TEXT NOT NULL,\
-                                model TEXT NOT NULL,\
-                                engine_size TEXT NOT NULL,\
-                                color TEXT NOT NULL,\
-                                number_of_seats INTEGER NOT NULL,\
-                                number_of_doors INTEGER NOT NULL,\
-                                daily_rate DECIMAL(10,2) NOT NULL,\
-                                image_side TEXT,\
-                                image_front TEXT,\
-                            );';
-            
-                            db.transaction(function (tx) {
-                                //Create customer table if it does not exist
-                                tx.executeSql(sqlCreateCustomerTable, null,  () => console.log("created sutomer table"), (err, error) => {
-                                    console.log(error);
-                                });
-                                tx.executeSql(sqlCreateCarTable, null, () => console.log("created car table"),);
-                                tx.executeSql("CREATE TABLE IF NOT EXISTS jabb;");
-                            });
+
         };
+
+
 
         app.addCustomer = function (customer) {
             console.log(customer);
@@ -170,29 +170,15 @@ $(function () {
                 + customer.email + "','"
                 + customer.phone + "');";
             console.log(sqlInsert);
-            var db = openDatabase('reservation.db', '1.3', 'description', 1 * 1024 * 1024)
+            var db = openDatabase('rentaltest.db', '1.0', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
                 //Insert customer data
-                tx.executeSql(sqlInsert);
+                tx.executeSql(sqlInsert,[],() => console.log("Customer inserted to DB"),(err, error) => console.log(error));
             });
         }
 
         app.addCar = function (car) {
             console.log(car);
-
-            let sqlCreateCarTable = 'CREATE TABLE IF NOT EXISTS Cars (\
-                registration TEXT PRIMARY KEY,\
-                make TEXT NOT NULL,\
-                model TEXT NOT NULL,\
-                engine_size TEXT NOT NULL,\
-                color TEXT NOT NULL,\
-                number_of_seats INTEGER NOT NULL,\
-                number_of_doors INTEGER NOT NULL,\
-                daily_rate DECIMAL(10,2) NOT NULL\
-                image_side TEXT,\
-                image_front TEXT,\
-            );';
-
 
             let sqlInsert = "INSERT INTO Cars VALUES ('" + car.registration + "','"
                 + car.make + "','"
@@ -204,12 +190,12 @@ $(function () {
                 + car.dailyRate + "','"
                 + car.imageSide + "','"
                 + car.imageFront + "');"
-                
-            console.log(sqlInsert);
-            var db = window.openDatabase('reservation.db', '1.3', 'description', 1 * 1024 * 1024)
+
+            console.log(sqlInsert,[],() => console.log("Car inserted to DB"),(err, error) => console.log(error));
+            var db = openDatabase('rentaltest.db', '1.0', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
                 //Create car table if it does not exist
-                tx.executeSql(sqlCreateCarTable);
+                //tx.executeSql(sqlCreateCarTable);
                 //tx.executeSql(sqlCreate);
                 //Insert car data
                 tx.executeSql(sqlInsert);
@@ -232,7 +218,7 @@ $(function () {
                     milage_options integer,\
                     FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),\
                     FOREIGN KEY (car_registration) REFERENCES Cars(registration)";
-            var db = openDatabase('reservation.db', '1.3', 'description', 1 * 1024 * 1024)
+            var db = openDatabase('reservation.db', '1.1', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
                 //Create car table if it does not exist
                 tx.executeSql(sqlCreateReservationTable, [], () => {
@@ -276,7 +262,7 @@ $(function () {
         // }
         app.searchCustomer = function (searchQuery) {
 
-            var db = openDatabase('reservation.db', '1.3', 'description', 1 * 1024 * 1024)
+            var db = openDatabase('reservation.db', '1.1', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
                 //select car data
                 let sql = "SELECT * FROM Customers WHERE first_name LIKE '%" + searchQuery + "%' OR last_name LIKE '%" + searchQuery + "%';";
@@ -336,7 +322,7 @@ $(function () {
 
         app.searchCustomerById = function (id) {
 
-            var db = openDatabase('reservation.db', '1.3', 'description', 1 * 1024 * 1024)
+            var db = openDatabase('reservation.db', '1.1', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
                 //select car data
                 let sql = "SELECT * FROM Customers WHERE customer_id = '" + id + "';";
@@ -360,7 +346,7 @@ $(function () {
         }
         /////////////////////////////////////
         app.searchCar = function (searchQuery) {
-            var db = openDatabase('reservation.db', '1.3', 'description', 1 * 1024 * 1024)
+            var db = openDatabase('rentaltest.db', '1.0', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
                 //select car data
                 let sql = "SELECT * FROM Cars WHERE make LIKE '%" + searchQuery + "%' OR model LIKE '%" + searchQuery + "%';";
@@ -429,7 +415,7 @@ $(function () {
 
         app.searchCarByReg = function (reg) {
 
-            var db = openDatabase('reservation.db', '1.3', 'description', 1 * 1024 * 1024)
+            var db = openDatabase('reservation.db', '1.1', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
                 //select car data
                 let sql = "SELECT * FROM Cars WHERE registration = '" + reg + "';";
@@ -462,8 +448,8 @@ $(function () {
 
         }
 
-        app.hideAllPages = function (){
-            $('[data-role="page"]').css("display", "none"); 
+        app.hideAllPages = function () {
+            $('[data-role="page"]').css("display", "none");
         }
 
 
