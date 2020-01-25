@@ -39,31 +39,36 @@
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css"> -->
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <script src="js/jquery-1.9.1.min.js"></script>
-    
-    
+    <script src="js/Customer.js"></script>
     <script src="js/app.js"></script>
-       <title class="title">Car reservation</title>
+    <title class="title">Car reservation</title>
 </head>
 
-<body class="body">
-    <header>
-        <h1>Reservation app</h1>
-    </header>
-    <div class="front-page">
-        <ul class="menu main-menu home-menu">
-            <a id="car-link" href="carRental.html" class="main-menu__link home-menu__link" class="btn"><div class="ui-dark-lens">
-                <li class="menu__item home-menu__item">Car rental</li> </div>
-               <!-- <img src="img/car-icon.svg" class="svg" alt="car icon">-->
-            </a>
-            <a id="apartment-link" href="apartmentReservation.html" class=" main-menu__link home-menu__link" class="btn"><div class="ui-dark-lens">
-            <li class="menu__item home-menu__item">Apartment rental</li>
-           <!-- <img src="img/apartment.svg" class="svg" alt="car icon">-->
+<body class="ui-body-d">
+    <div data-role="page" id="page1">
+        <div data-role="header">
+            <h1>Car reservation app</h1>
         </div>
-        </a>
-        </ul>
-    </div>
-    <script type="text/javascript" src="cordova.js"></script>
-
-</body>
-
-</html>
+        <div>
+            <ul class="menu main-menu">
+                <a class="main-menu__link" href="carRentalForm.html" id="button-page4">
+                    <div class="ui-dark-lens">
+                        <li class="menu__item">MAKE CAR RESERVATION</li class="menu__item">
+                       
+                    </div>
+                </a>
+                <a class="main-menu__link" href="#page2" id="button-page2">
+                    <div class="ui-dark-lens">
+                    <li class="menu__item">ADD NEW CAR</li class="menu__item">
+                  
+                </div>
+                </a>
+                <a class="main-menu__link" href="#page3" id="button-page3">
+                    <div class="ui-dark-lens">
+                    <li class="menu__item">ADD CUSTOMER</li class="menu__item">
+                
+                </div>
+                </a>
+            </ul>
+        </div>
+    </body>

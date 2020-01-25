@@ -62,7 +62,7 @@ $(function () {
                 app.searchCustomer(searchQuery);
             });
 
-            $('#search_car').bind('click', function (e) {
+            $('#search_car-btn').bind('click', function (e) {
 
                 // search for cars in database
                 let searchQuery = $('#carName').val();
@@ -113,6 +113,7 @@ $(function () {
                 app.hideAllPages();
                 $("#page4").css("display", "block");
             });
+
         };
 
         app.db = function () {
@@ -352,62 +353,88 @@ $(function () {
                 let sql = "SELECT * FROM Cars WHERE make LIKE '%" + searchQuery + "%' OR model LIKE '%" + searchQuery + "%';";
                 console.log(sql);
                 tx.executeSql(sql, [], function (tx, results) {
-                    var len = results.rows.length;
-                    let msg = "<p> Car(s) found: " + len + "</p>";
-                    console.log(msg);
-                    $("#carResultRows").empty();
-                    $("#carResultRows").append(msg);
-                    $("#carTable").empty();
-                    $("#carTable").append("<table data-role='table' id='table-cars' data-mode='columntoggle'\
-                            class='ui-responsive table-stroke'>\
-                            <thead>\
-                            <tr>\
-                                <th data-priority='2' >Car</th>\
-                                <th data-priority='3'>Daily rate</th>\
-                                <th data-priority='4'>Seating</th>\
-                                <th data-priority='5'>Doors</th>\
-                                <th data-priority='6'>Reg</th>\
-                            </tr>\
-                        </thead>\
-                        <tbody id='table-car__rows'>\
-                        </tbody>\
-                        </table>");
+                     var len = results.rows.length;
+                    // let msg = "<p> Car(s) found: " + len + "</p>";
+                    console.log(results);
+                    $("#carRentalPage").css("display", "none");
+                    $("#carListPage").css("display", "block");
+
+                    $(".requirements").append('<div class="requirements__requirement">\
+                    <p class="u-inline-block">\
+                       '+ searchQuery + '\
+                    </p>\
+                    <p class="u-inline-block" id="remove">\
+                        X\
+                    </p>\
+                </div>');
+
+                    for(let i = 0; i < len; i++)
+{
+                    $(".cars-list").append('\
+                    <article class="car" id="'+ results.rows.item(i).registration +'">\
+                    <div class="car__info">\
+                        <h2 class="car__info-header" id="car-name">'+ results.rows.item(i).make + " " + results.rows.item(i).model + '</h2>\
+                        <p class="car__info-price" id="car-price">'+ results.rows.item(i).daily_rate + "€/day" +'</p>\
+                    </div>\
+                    <div class="car__image-box">\
+                        <img src="img/'+ results.rows.item(i).image_side +'" id="car-image" alt="" class="car-image">\
+                    </div>\
+                </article>')
+}
+                //     console.log(msg);
+                //     $("#carResultRows").empty();
+                //     $("#carResultRows").append(msg);
+                //     $("#carTable").empty();
+                //     $("#carTable").append("<table data-role='table' id='table-cars' data-mode='columntoggle'\
+                //             class='ui-responsive table-stroke'>\
+                //             <thead>\
+                //             <tr>\
+                //                 <th data-priority='2' >Car</th>\
+                //                 <th data-priority='3'>Daily rate</th>\
+                //                 <th data-priority='4'>Seating</th>\
+                //                 <th data-priority='5'>Doors</th>\
+                //                 <th data-priority='6'>Reg</th>\
+                //             </tr>\
+                //         </thead>\
+                //         <tbody id='table-car__rows'>\
+                //         </tbody>\
+                //         </table>");
 
 
-                    for (let i = 0; i < len; i++) {
-                        console.log(results.rows.item(i).make);
-                        $("#table-car__rows").append("\
-                            <tr class='add-car' id="+ results.rows.item(i).registration + ">\
-                            <td>"+ results.rows.item(i).make + " " + results.rows.item(i).model + "</td>\
-                            <td >"+ results.rows.item(i).daily_rate + "</td>\
-                            <td >"+ results.rows.item(i).number_of_seats + "</td>\
-                            <td >"+ results.rows.item(i).number_of_doors + "</td>\
-                            <td >"+ results.rows.item(i).registration + "</td>\
-                          </tr>");
-                    }
+                //     for (let i = 0; i < len; i++) {
+                //         console.log(results.rows.item(i).make);
+                //         $("#table-car__rows").append("\
+                //             <tr class='add-car' id="+ results.rows.item(i).registration + ">\
+                //             <td>"+ results.rows.item(i).make + " " + results.rows.item(i).model + "</td>\
+                //             <td >"+ results.rows.item(i).daily_rate + "</td>\
+                //             <td >"+ results.rows.item(i).number_of_seats + "</td>\
+                //             <td >"+ results.rows.item(i).number_of_doors + "</td>\
+                //             <td >"+ results.rows.item(i).registration + "</td>\
+                //           </tr>");
+                //     }
 
-                    $('.add-car').bind('click', function (e) {
+                //     $('.add-car').bind('click', function (e) {
 
-                        // rent car
+                //         // rent car
 
 
-                        app.searchCarByReg(this.id);
-                        app.tempCarStorage(this.id);
-                    });
+                //         app.searchCarByReg(this.id);
+                //         app.tempCarStorage(this.id);
+                //     });
 
-                    let item = $(".add-car");
+                //     let item = $(".add-car");
 
-                    console.log(item.length);
-                    for (let i = 0; i < item.length; i++) {
+                //     console.log(item.length);
+                //     for (let i = 0; i < item.length; i++) {
 
-                        $(item[i]).bind('click', function (e) {
-                            console.log(this.id)
-                        });
+                //         $(item[i]).bind('click', function (e) {
+                //             console.log(this.id)
+                //         });
 
-                    }
-                }, (err, errorStatement) => {
-                    console.log(errorStatement);
-                });
+                //     }
+                // }, (err, errorStatement) => {
+                //     console.log(errorStatement);
+                 });
 
             });
 
