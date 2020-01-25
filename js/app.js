@@ -1,4 +1,7 @@
 $(function () {
+
+   // INSERT INTO Cars VALUES ('RTF-852','Tesla','Model 3','240','White','5','5','40','tesla3.jpg','tesla3-front.png');
+
     // define the application
     var ReservationApp = {};
 
@@ -119,7 +122,7 @@ $(function () {
         app.db = function () {
 
 
-            var db = openDatabase('rentaltest.db', '1.0', 'description', 1 * 1024 * 1024, () => {
+            var db = openDatabase('rentaltest1.db', '1.0', 'description', 1 * 1024 * 1024, () => {
                 //Runs if a database had to be created
 
                 //Create tables
@@ -144,13 +147,26 @@ $(function () {
     number_of_doors INTEGER NOT NULL,\
     daily_rate DECIMAL(10,2) NOT NULL,\
     image_side TEXT,\
-    image_front TEXT\
+    image_front TEXT,\
+    transmission TEXT,\
+    fuel TEXT\
 );';
 
                 db.transaction(function (tx) {
                     //Create customer table if it does not exist
                     tx.executeSql(sqlCreateCustomerTable, [], () => console.log("created customer table"), (err, error) => console.log(error));
-                    tx.executeSql(sqlCreateCarTable, [], () => console.log("created car table"), (err, error) => console.log(error));
+                    tx.executeSql(sqlCreateCarTable, [], () => {
+                        console.log("created car table")
+                        tx.executeSql("INSERT INTO Cars VALUES ('RTF-852','Tesla','Model 3','240','White','5','5','40','tesla3.jpg','tesla3-front.png', 'Automatic', 'Electric')");
+                        tx.executeSql("INSERT INTO Cars VALUES ('RTF-853','Tesla','Model X','259','Black','5','5','50','teslaX.jpg','teslaX-front.jpg', 'Automatic', 'Electric')");
+                        tx.executeSql("INSERT INTO Cars VALUES ('RTF-854','Tesla','Model S','480','Blue','5','5','65','teslaS.jpg','teslaS-front.jpg', 'Automatic', 'Electric')");
+                        tx.executeSql("INSERT INTO Cars VALUES ('RTF-855','BMW','M5','280','Red','5','5','205','bmwm5.jpg','bmwm5-front.jpg', 'Manual', 'Gas')");
+                        tx.executeSql("INSERT INTO Cars VALUES ('RTF-856','Ferrari','California','590','Red','5','5','350','ferrarricalifornia.jpg','ferrarricalifornia-front.jpg', 'Manual', 'Gas')");
+                        tx.executeSql("INSERT INTO Cars VALUES ('RTF-857','Mercedes','Benz C','175','Silver','5','5','170','mercedesbenzc.jpg','mercedesbenzc-front.jpg', 'Manual', 'Gas')");
+                        tx.executeSql("INSERT INTO Cars VALUES ('RTF-858','BMW','X6','175','Black','5','5','140','bmwx6.jpg','bmwx6-front.jpg', 'Manual', 'Gas')");
+                    }, (err, error) => console.log(error));
+
+
                 });
 
                 console.log("Database created");
@@ -171,7 +187,7 @@ $(function () {
                 + customer.email + "','"
                 + customer.phone + "');";
             console.log(sqlInsert);
-            var db = openDatabase('rentaltest.db', '1.0', 'description', 1 * 1024 * 1024)
+            var db = openDatabase('rentaltest1.db', '1.0', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
                 //Insert customer data
                 tx.executeSql(sqlInsert,[],() => console.log("Customer inserted to DB"),(err, error) => console.log(error));
@@ -193,7 +209,7 @@ $(function () {
                 + car.imageFront + "');"
 
             console.log(sqlInsert,[],() => console.log("Car inserted to DB"),(err, error) => console.log(error));
-            var db = openDatabase('rentaltest.db', '1.0', 'description', 1 * 1024 * 1024)
+            var db = openDatabase('rentaltest1.db', '1.0', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
                 //Create car table if it does not exist
                 //tx.executeSql(sqlCreateCarTable);
@@ -347,7 +363,7 @@ $(function () {
         }
         /////////////////////////////////////
         app.searchCar = function (searchQuery) {
-            var db = openDatabase('rentaltest.db', '1.0', 'description', 1 * 1024 * 1024)
+            var db = openDatabase('rentaltest1.db', '1.0', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
                 //select car data
                 let sql = "SELECT * FROM Cars WHERE make LIKE '%" + searchQuery + "%' OR model LIKE '%" + searchQuery + "%';";
@@ -381,6 +397,14 @@ $(function () {
                     </div>\
                 </article>')
 }
+
+                     $('.car').bind('click', function (e) {
+
+                         // rent car
+                         app.searchCarByReg(this.id);
+                         //app.tempCarStorage(this.id);
+                     });
+                
                 //     console.log(msg);
                 //     $("#carResultRows").empty();
                 //     $("#carResultRows").append(msg);
@@ -442,7 +466,7 @@ $(function () {
 
         app.searchCarByReg = function (reg) {
 
-            var db = openDatabase('reservation.db', '1.1', 'description', 1 * 1024 * 1024)
+            var db = openDatabase('rentaltest1.db', '1.0', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
                 //select car data
                 let sql = "SELECT * FROM Cars WHERE registration = '" + reg + "';";
@@ -456,8 +480,22 @@ $(function () {
                         console.log(results.rows.item(i).make);
                         $("#chosenCar").val(results.rows.item(i).make + " " + results.rows.item(i).model + " " + results.rows.item(i).registration.toUpperCase());
                     }
+                    $("#rentCar").val("");
+                    $(".rentCar").append('\
+                    <article class="car" id="'+ results.rows.item(0).registration +'">\
+                    <div class="car__info">\
+                        <h2 class="car__info-header" id="car-name">'+ results.rows.item(0).make + " " + results.rows.item(0).model + '</h2>\
+                        <p class="car__info-price" id="car-price">'+ results.rows.item(0).daily_rate + "€/day" +'</p>\
+                    </div>\
+                    <div class="car__image-box">\
+                        <img src="img/'+ results.rows.item(0).image_side +'" id="car-image" alt="" class="car-image">\
+                    </div>\
+                </article>');
                 }, null);
             });
+            $("#carRentalPage").css("display", "block");
+            $("#carListPage").css("display", "none");
+
         }
 
         app.tempCarStorage = function (reg) {
