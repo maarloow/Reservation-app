@@ -1,13 +1,14 @@
 
-function customer(firstName, lastName, dateOfBirth, city, adress, email, phone) {
+function customer(firstName, lastName, dateOfBirth, city, street, phone, email) {
     let customer = {
     firstName: firstName,
     lastName : lastName,
     dateOfBirth : dateOfBirth,
     city : city,
-    adress : adress,
-    email : email,
-    phone : phone
+    street : street,
+    phone : phone,
+    email : email
+    
     };
   return customer;
 }

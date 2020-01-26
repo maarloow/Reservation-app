@@ -17,6 +17,12 @@
   height: 100%;
 }
 
+.ui-center-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .car {
   display: flex;
   flex-direction: row;
@@ -209,9 +215,8 @@ input {
 
 .menu__item {
   list-style-type: none;
-  font-size: 25px;
+  font-size: 22px;
   text-align: center;
-  height: 100%;
 }
 
 .menu__item-link {
@@ -232,13 +237,31 @@ input {
   flex-direction: row;
   justify-content: space-between;
   height: 100px;
-  width: 90%;
+  width: 100%;
   background-color: lightblue;
+}
+
+.main-menu__link-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(18, 98, 181, 0.8);
+  width: 100%;
+  height: 100%;
+}
+
+.main-menu__icon {
+  height: 100px;
+  filter: brightness(0) invert(1);
+  margin: 10px;
 }
 
 .home-menu__link {
   color: white;
   justify-content: center;
+  height: 45vh;
+  width: 100%;
 }
 
 .home-menu__item {
@@ -259,10 +282,6 @@ input {
   background-repeat: no-repeat;
 }
 
-.home-menu__link {
-  height: 40vh;
-}
-
 .svg {
   height: 60px;
 }
@@ -280,10 +299,13 @@ input {
   font-weight: bold;
   text-align: center;
   color: #D2C166;
+  margin: 10px;
 }
 
-.header {
-  height: 12px;
+.back-btn {
+  position: absolute;
+  top: 0px;
+  left: 5px;
 }
 
 .car-card__img {
@@ -322,6 +344,25 @@ input {
 
 .car-card__text {
   color: #DBDBDB;
+}
+
+.customer {
+  display: flex;
+  flex-direction: row;
+  padding-left: 10px;
+  align-items: center;
+  background-color: #1262b5;
+  margin-bottom: 5px;
+  color: white;
+  font-size: 13px;
+  padding: 10px;
+}
+.customer p {
+  margin-bottom: 3px;
+}
+.customer__name {
+  font-size: 25px;
+  color: #D2C166;
 }
 
 /*

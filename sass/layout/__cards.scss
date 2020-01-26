@@ -39,3 +39,24 @@
 .car-card__text{
     color: #DBDBDB;
 }
+
+.customer{
+    display: flex;
+    flex-direction: row;
+    padding-left: 10px;
+    align-items: center;
+    background-color: #1262b5;
+    margin-bottom: 5px;
+    color: white;
+    font-size: 13px;
+    padding: 10px;
+    p{
+        margin-bottom: 3px;
+    }
+    &__name{
+        font-size: 25px;
+        color: #D2C166;
+    }
+
+    
+}
