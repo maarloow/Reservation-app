@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <!--<link rel="stylesheet" href="css/VIRIGO.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/Customer.js"></script>
+    <script src="js/app.js"></script>
+    <title class="title">Car reservation</title>
+</head>
+
+<body class="ui-body-d">
+
+    <div data-role="page" class="" id="carRentalPage">
+        <div class="header">
+            <div class="top-bar">
+                <a href="carRental.html" class="back-btn">
+                    <img src="img/back-btn.svg" alt="" class="back-btn__icon">
+                </a>
+                <h1 class="page-header">Make reservation</h1>
+            </div>
+        </div>
+        <div class="content ">
+
+           
+            <form class="form " id="carRentForm">
+                <div class="form-group">
+                    <div class="form-block">
+                        <h2>Date</h2>
+                    </div>
+                    <div class="form-block">
+                        <label for="fromDate">From:</label>
+                        <input type="date" name="fromDate" id="fromDate" required />
+                    </div>
+                    <div class="form-block">
+                        <label for="toDate">To:</label>
+                        <input type="date" name="toDate" id="toDate" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-block">
+                        <h2>Customer</h2>
+                    </div>
+                    <div class="form-block">
+                        <label class="form-block__c" for="firstName">Name </label>
+                        <input class=" form-block__c" type="text" name="firstName" id="firstName" value="" />
+                    </div>
+                    <div class="form-block">
+                        <input class="btn btn-form" type="button" value="Add new" id="getCustomerForm-btn">
+                        <input class="btn btn-form" type="button" value="Search" id="search_customer-btn">
+                    </div>
+
+                    <div class="form-block">
+                        <label for="chosenCustomer">Customer: </label>
+                        <input type="text" class="readonly" name="chosenCustomer" id="chosenCustomer"
+                            placeholder="search for a car above" value="" required>
+                    </div> 
+                    <div id="addedCustomer">
+                        
+                    </div>
+                </div>
+                <!-- Choose a car -->
+                <div class="form-group">
+                    <div class="form-block">
+                        <h2>Car</h2>
+                    </div>
+                    <div class="form-block">
+                        <label class="form-block__c" for="carName">Car: </label>
+                        <input class="form-block__c" type="text" name="carName" id="carName" value="" />
+                    </div>
+                    <input class="btn btn-form" type="button" value="Search" id="search_car-btn">
+                    <div class="form-block">
+                        <label for="chosenCar">Rent: </label>
+                        <input type="text" class="readonly" name="chosenCar" id="chosenCar"
+                            placeholder="search for a car above" value="" required>
+                    </div> 
+                    <div class="rentCar">
+
+                    </div>
+                    <!-- search results
+                <h3 id="carResultRows"></h3>
+                <div id="carTable">
+
+                </div>
+-->
+                    <!-- print out added cars
+                <div class="add-customer">
+
+                </div>
+                -->
+                    <!-- <table data-role="table" id="table-cars" data-mode="columntoggle"
+                    class="ui-responsive table-stroke">
+                    <thead>
+                        <tr>
+                            <th>Car</th>
+                            <th data-priority="2" id="">Registration</th>
+                            <th data-priority="3" id="" >Daily rate</th>
+                            <th data-priority="4">Seating</th>
+                            <th data-priority="5">Doors</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-car__rows">
+
+
+
+                    </tbody>
+                </table> -->
+
+                </div>
+                <!--
+            <div class="customer-box form-chapter">
+                <h2>Customer</h2>
+
+                <h3>Search existing</h3>
+                <div class="form-block">
+                    <label class="form-block__c" for="firstName">First name: </label>
+                    <input class=" form-block__c" type="text" name="firstName" id="firstName" value="" />
+                </div>
+                <div class="form-block">
+                    <label class="form-block__c" for="lasttName">Last name: </label>
+                    <input class=" form-block__c" type="text" name="lastName" id="lastName" value="" />
+                </div>
+                <div class="form-block">
+                    <input class="form-block__c btn" type="button" value="Add new">
+                    <h2>or</h2>
+                    <input class="form-block__c btn" type="button" value="Search" id="search_customer">
+                </div>
+                <div class="form-block">
+                    <label for="chosenCustomer">Customer: </label>
+                    <input type="text" class="readonly" name="chosenCustomer" id="chosenCustomer"
+                        placeholder="search for a customer above" required>
+                </div>
+
+                 List all matching customers here
+
+                <h3 id="customerResultRows"></h3>
+                <div id="customerTable">
+
+                </div>
+                print out added customers
+                <div class="added-customers">
+
+                </div>
+            </div>
+            -->
+
+                <div class="form-group">
+                    <div class="form-block">
+                        <h2>Milage options</h2>
+
+                    </div>
+                    <div class="form-block">
+                        <label for="milage">Milage: </label>
+                        <input type="number" name="milage" id="milage" placeholder="optional">
+                    </div>
+                </div>
+                <input type="submit" value="SUBMIT" class="btn" id="commit-car-reservation" />
+            </form>
+            </ul>
+        </div>
+    </div>
+
+
+    <!--        Car list page       -->
+    <div id="carListPage">
+        <div class="header">
+            <div class="top-bar">
+                <a href="" class="back-btn">
+                    <img src="img/back-btn.svg" alt="" class="back-btn__icon">
+                </a>
+                <h1 class="page-header">Select vehicle</h1>
+            </div>
+        </div>
+        
+        <div class="requirements">
+
+
+            <div class="requirements__requirement" id="add">
+                <p class="u-inline-block">
+                    Add
+                </p>
+
+
+            </div>
+        </div>
+        <div class="cars-list">
+
+        </div>
+    </div>
+
+
+    <!--        ADD CUSTOMER PAGE       -->
+
+    <div id="addCustomerPage">
+        <div class="header">
+            <div class="top-bar">
+                <a href="" class="back-btn">
+                    <img src="img/back-btn.svg" alt="" class="back-btn__icon">
+                </a>
+                <h1 class="page-header">Add customer</h1>
+            </div>
+        </div>
+        <div class="content">
+
+                    <form class="form " id="addCustomerForm">
+                        <div class="form-group">
+                            <div class="form-block">
+                                <h1>Customer info</h1>
+                            </div>
+                            <div class="form-block">
+                                <label for="fName">First Name</label>
+                                <input type="text" name="fName" id="fName" required />
+                            </div>
+                            <div class="form-block">
+                                <label for="lName">Last Name</label>
+                                <input type="text" name="lName" id="lName"  required>
+                            </div>
+                            <div class="form-block">
+                                <label for="birth">Birth:</label>
+                                <input type="date" name="birth" id="birth" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-block">
+                                <h2>Adress</h2>
+                            </div>
+
+                            <div class="form-block">
+                                <label for="city">City</label>
+                                <input type="text" name="city" id="city" required />
+                            </div>
+                            <div class="form-block">
+                                <label for="street">Street</label>
+                                <input type="text" name="street" id="street" required/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-block">
+                                <h2>Contact</h2>
+                            </div>
+
+                            <div class="form-block">
+                                <label for="phone">Phone</label>
+                                <input type="text" name="phone" id="phone" required />
+                            </div>
+
+                            <div class="form-block">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" required/>
+                            </div>
+                            <input type="submit" value="Add customer" id="addCustomer" class="btn">
+                        </div>
+                        </form>
+            
+            </ul>
+        </div>
+        </div>
+
+    <!--      Customer list page       -->
+    <div id="customerListPage">
+        <div class="header">
+            <div class="top-bar">
+                <a href="" class="back-btn">
+                    <img src="img/back-btn.svg" alt="" class="back-btn__icon">
+                </a>
+                <h1 class="page-header">Select customer</h1>
+            </div>
+        </div>
+        <div class="requirements">
+            <div class="requirements__requirement">
+                <p class="u-inline-block">
+                    Tim
+                </p>
+                <p class="u-inline-block" id="remove">
+                    X
+                </p>
+
+            </div>
+            <div class="requirements__requirement">
+                <p class="u-inline-block">
+                    Persson
+                </p>
+                <p class="u-inline-block" id="remove">
+                    X
+                </p>
+
+            </div>
+            <div class="requirements__requirement" id="add">
+                <p class="u-inline-block">
+                    Add
+                </p>
+
+
+            </div>
+        </div>
+        <div class="customer-list">
+   
+        </div>
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+
+</body>
+
+</html>

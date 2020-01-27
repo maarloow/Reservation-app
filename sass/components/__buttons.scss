@@ -30,7 +30,7 @@
 
 }
 
-#button-page4, #button-page3, #button-page2{
+#button-page4, #button-page3, #button-page2, #button-page2-apps{
     background-repeat: no-repeat;
     background-size: cover;
     height: 200px;
@@ -43,11 +43,14 @@
 }
    
 #button-page2{
-    background-image: url("../img/addcustomer.jpg");
-
+    background-image: url("../img/addcar.jpg");
+    &-apps{
+        background-image: url("../img/apartment.jpg");
+    }
 }
 #button-page3{
-    background-image: url("../img/addcar.jpg");
+    background-image: url("../img/addCustomer.jpg");
 
 }
+
 //da
