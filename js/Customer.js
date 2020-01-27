@@ -29,12 +29,12 @@ function car(registration, make, model, engineSize, color, numberOfSeats, number
   return car;
 }
 
-function reservation(customer_id, registration, fromDate, toDate, milage) {
+function reservation(customer_id, car_registration, from_date, to_date, milage) {
   let reservation = {
 customer_id : customer_id,
-registration : registration,
-fromDate : fromDate,
-toDate : toDate,
+car_registration : car_registration,
+from_date : from_date,
+to_date : to_date,
 milage : milage
   };
 return reservation;

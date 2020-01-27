@@ -16,9 +16,13 @@ $(function () {
         };
 
         app.bindings = function () {
+            $('#getCustomerForm-btn').bind('click', function (e) {
+                $("#addCustomerPage").css("display", "block");
+                $("#carRentalPage").css("display", "none");
+            });
             $('#addCustomer').bind('click', function (e) {
                 // Get customer data when form is submitted successfully
-                $('#customerForm').submit(function (e) {
+                $('#addCustomerForm').submit(function (e) {
                     e.preventDefault();
 
                     let newCustomer = customer(
@@ -31,8 +35,11 @@ $(function () {
                         $('#email').val()
 
                     );
-
+                    $('#addCustomerForm')[0].reset();
+                    $("#addCustomerPage").css("display", "none");
+                    $("#carRentalPage").css("display", "block");
                     app.addCustomer(newCustomer);
+                    app.searchCustomerById();
                 });
             });
 
@@ -54,11 +61,12 @@ $(function () {
                         $('#imageSide').val(),
                         $('#imageFront').val()
                     );
+                    console.log(newCar);
                     app.addCar(newCar);
                 });
             });
 
-            $('#search_customer').bind('click', function (e) {
+            $('#search_customer-btn').bind('click', function (e) {
 
                 // search for customers in database
                 let searchQuery = $('#firstName').val();
@@ -79,21 +87,21 @@ $(function () {
                 e.preventDefault();
             });
 
+//  MAKE CAR RESERVATION //
             $("#commit-car-reservation").bind('click', function (e) {
                 console.log("sub");
                 $("#carRentForm").submit(function (e) {
 
                     e.preventDefault();
                     //#fromDate, toDate, getItem("reg/id")
-                    let fromDate = $("#fromDate").val();
-                    let toDate = $("#toDate").val();
+                    let from_date = $("#fromDate").val();
+                    let to_date = $("#toDate").val();
                     let milage = $("#milage").val();
-                    var storage = window.localStorage;
-
-                    let carReg = storage.getItem("reg");
-                    let customerId = storage.getItem("id");
-                    console.log(fromDate + " " + toDate + " " + carReg + " " + customerId + " " + milage);
-                    let newReservation = reservation(customerId, carReg, fromDate, toDate, milage);
+                    let customer_id = $(".single-customer")[0].id;
+                    let car_registration = $(".single-car")[0].id;
+                    console.log($(".single-car")[0]);
+                    console.log(from_date + " " + to_date + " " + car_registration + " " + customer_id + " " + milage);
+                    let newReservation = reservation(customer_id, car_registration, from_date, to_date, milage);
                     app.addReservation(newReservation);
                 });
             });
@@ -153,12 +161,24 @@ $(function () {
     fuel TEXT\
 );';
 
+                let sqlCreateReservationTable = "CREATE TABLE Car_Reservation (\
+    rental_id INTEGER PRIMARY KEY AUTOINCREMENT,\
+    customer_id INTEGER NOT NULL,\
+    car_registration TEXT NOT NULL,\
+    from_date DATE NOT NULL,\
+    to_date DATE NOT NULL,\
+    milage integer,\
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),\
+    FOREIGN KEY (car_registration) REFERENCES Cars(registration));";
+
 
 
 
                 db.transaction(function (tx) {
                     //Create customer table if it does not exist
                     tx.executeSql(sqlCreateCustomerTable, [], () => {
+
+
                         console.log("created customer table")
                         tx.executeSql("INSERT INTO Customers VALUES (NULL,'Kalle','Persson','1991-04-04','Vasa','Vasaesplanaden 21','0405251267','Kalle@m.fi')");
                         tx.executeSql("INSERT INTO Customers VALUES (NULL,'Ville','Holm','1992-08-04','Åbo','Götagatan 22','0409856237','Ville@m.fi')");
@@ -167,18 +187,33 @@ $(function () {
                         tx.executeSql("INSERT INTO Customers VALUES (NULL,'Tim','Kvist','1981-01-04','Umeå','Snårgränd 25','0409853347','Tim@m.fi');");
                         tx.executeSql("INSERT INTO Customers VALUES (NULL,'Dalin','Persson','1991-04-03','Karleby','Tornstigen 22','0409541267','Dalin@m.fi')");
                         tx.executeSql("INSERT INTO Customers VALUES (NULL,'Palle','Sten','1981-04-02','Umeå','Sjövägen 24','0409855687','Palle@m.fi')");
+
+
+                        tx.executeSql(sqlCreateCarTable, [], () => {
+                            console.log("created car table")
+
+                            tx.executeSql("INSERT INTO Cars VALUES ('RTF-852','Tesla','Model 3','240','White','5','5','40','tesla3.jpg','tesla3-front.png', 'Automatic', 'Electric')");
+                            tx.executeSql("INSERT INTO Cars VALUES ('RTF-853','Tesla','Model X','259','Black','5','5','50','teslaX.jpg','teslaX-front.jpg', 'Automatic', 'Electric')");
+                            tx.executeSql("INSERT INTO Cars VALUES ('RTF-854','Tesla','Model S','480','Blue','5','5','65','teslaS.jpg','teslaS-front.jpg', 'Automatic', 'Electric')");
+                            tx.executeSql("INSERT INTO Cars VALUES ('RTF-855','BMW','M5','280','Red','5','5','205','bmwm5.jpg','bmwm5-front.jpg', 'Manual', 'Gas')");
+                            tx.executeSql("INSERT INTO Cars VALUES ('RTF-856','Ferrari','California','590','Red','5','5','350','ferrarricalifornia.jpg','ferrarricalifornia-front.jpg', 'Manual', 'Gas')");
+                            tx.executeSql("INSERT INTO Cars VALUES ('RTF-857','Mercedes','Benz C','175','Silver','5','5','170','mercedesbenzc.jpg','mercedesbenzc-front.jpg', 'Manual', 'Gas')");
+                            tx.executeSql("INSERT INTO Cars VALUES ('RTF-858','BMW','X6','175','Black','5','5','140','bmwx6.jpg','bmwx6-front.jpg', 'Manual', 'Gas')");
+
+                            tx.executeSql(sqlCreateReservationTable, [], () => {
+                        
+                                tx.executeSql("INSERT INTO Car_Reservation VALUES (null,'1','RTF-852','2020-03-03','2020-03-05','200');");
+        
+                            }, (err, error) => {
+                                console.log(error);
+                                console.log(err);
+                            });
+
+                        }, (err, error) => console.log(error));
                     }, (err, error) => console.log(error));
 
-                    tx.executeSql(sqlCreateCarTable, [], () => {
-                        console.log("created car table")
-                        tx.executeSql("INSERT INTO Cars VALUES ('RTF-852','Tesla','Model 3','240','White','5','5','40','tesla3.jpg','tesla3-front.png', 'Automatic', 'Electric')");
-                        tx.executeSql("INSERT INTO Cars VALUES ('RTF-853','Tesla','Model X','259','Black','5','5','50','teslaX.jpg','teslaX-front.jpg', 'Automatic', 'Electric')");
-                        tx.executeSql("INSERT INTO Cars VALUES ('RTF-854','Tesla','Model S','480','Blue','5','5','65','teslaS.jpg','teslaS-front.jpg', 'Automatic', 'Electric')");
-                        tx.executeSql("INSERT INTO Cars VALUES ('RTF-855','BMW','M5','280','Red','5','5','205','bmwm5.jpg','bmwm5-front.jpg', 'Manual', 'Gas')");
-                        tx.executeSql("INSERT INTO Cars VALUES ('RTF-856','Ferrari','California','590','Red','5','5','350','ferrarricalifornia.jpg','ferrarricalifornia-front.jpg', 'Manual', 'Gas')");
-                        tx.executeSql("INSERT INTO Cars VALUES ('RTF-857','Mercedes','Benz C','175','Silver','5','5','170','mercedesbenzc.jpg','mercedesbenzc-front.jpg', 'Manual', 'Gas')");
-                        tx.executeSql("INSERT INTO Cars VALUES ('RTF-858','BMW','X6','175','Black','5','5','140','bmwx6.jpg','bmwx6-front.jpg', 'Manual', 'Gas')");
-                    }, (err, error) => console.log(error));
+
+
 
 
                 });
@@ -197,14 +232,17 @@ $(function () {
                 + customer.lastName + "','"
                 + customer.dateOfBirth + "','"
                 + customer.city + "','"
-                + customer.adress + "','"
+                + customer.street + "','"
                 + customer.email + "','"
                 + customer.phone + "');";
             console.log(sqlInsert);
             var db = openDatabase('rentaltest1.db', '1.0', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
                 //Insert customer data
-                tx.executeSql(sqlInsert, [], () => console.log("Customer inserted to DB"), (err, error) => console.log(error));
+                tx.executeSql(sqlInsert, [], () => {
+                    console.log("Customer inserted to DB");
+                    //app.searchCustomerById(app.getLatestCustomerId());
+                }, (err, error) => console.log(error));
             });
         }
 
@@ -235,31 +273,15 @@ $(function () {
 
         app.addReservation = function (reservation) {
             let sqlInsert = "INSERT INTO Car_Reservation VALUES (null, '" + reservation.customer_id + "','"
-                + reservation.registration + "','"
-                + reservation.fromDate + "','"
-                + reservation.toDate + "','"
+                + reservation.car_registration + "','"
+                + reservation.from_date + "','"
+                + reservation.to_date + "','"
                 + reservation.milage + "');";
             console.log(sqlInsert);
-            let sqlCreateReservationTable = "CREATE TABLE IF NOT EXISTS Car_Reservation (\
-                    car_reservation_id INTEGER PRIMARY KEY AUTOINCREMENT,\
-                    customer_id INTEGER NOT NULL,\
-                    car_registration TEXT NOT NULL,\
-                    reservation_fromDate DATE NOT NULL,\
-                    reservation_toDate DATE NOT NULL,\
-                    milage_options integer,\
-                    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),\
-                    FOREIGN KEY (car_registration) REFERENCES Cars(registration)";
-            var db = openDatabase('reservation.db', '1.1', 'description', 1 * 1024 * 1024)
-            db.transaction(function (tx) {
-                //Create car table if it does not exist
-                tx.executeSql(sqlCreateReservationTable, [], () => {
-                    //Insert car data
-                    tx.executeSql(sqlInsert);
-                }, (err, error) => {
-                    console.log(error);
-                    console.log(err);
-                });
 
+            var db = openDatabase('rentaltest1.db', '1.0', 'description', 1 * 1024 * 1024)
+            db.transaction(function (tx) { 
+                    tx.executeSql(sqlInsert);
             });
         }
 
@@ -293,7 +315,7 @@ $(function () {
         // }
         app.searchCustomer = function (searchQuery) {
 
-            var db = openDatabase('reservation.db', '1.1', 'description', 1 * 1024 * 1024)
+            var db = openDatabase('rentaltest1.db', '1.0', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
                 //select car data
                 let sql = "SELECT * FROM Customers WHERE first_name LIKE '%" + searchQuery + "%' OR last_name LIKE '%" + searchQuery + "%';";
@@ -302,48 +324,42 @@ $(function () {
                     var len = results.rows.length;
                     let msg = "<p> Customers(s) found: " + len + "</p>";
                     console.log(msg);
-                    $("#customerResultRows").empty();
-                    $("#customerResultRows").append(msg);
-                    $("#customerTable").empty();
-                    $("#customerTable").append("<table data-role='table' id='table-customers' data-mode='columntoggle'\
-                            class='ui-responsive table-stroke'>\
-                            <thead>\
-                            <tr>\
-                                <th data-priority='2' >Name</th>\
-                                <th data-priority='3'>Birth</th>\
-                                <th data-priority='4'>Adress</th>\
-                            </tr>\
-                        </thead>\
-                        <tbody id='table-customer__rows'>\
-                        </tbody>\
-                        </table>");
+
 
                     for (let i = 0; i < len; i++) {
                         console.log(results.rows.item(i).first_name);
-                        $("#table-customer__rows").append("\
-                            <tr class='add-customer' id="+ results.rows.item(i).customer_id + ">\
-                            <td>"+ results.rows.item(i).first_name + " " + results.rows.item(i).last_name + "</td>\
-                            <td >"+ results.rows.item(i).date_of_birth + "</td>\
-                            <td >"+ results.rows.item(i).adress + "</td>\
-                          </tr>");
+                        $(".customer-list").append('\
+                        <article class="customer" id="'+ results.rows.item(i).customer_id + '">\
+                        <div class="customer-info">\
+                            <h2 class="customer__name">'+ results.rows.item(i).first_name + " " + results.rows.item(i).last_name + '</h2>\
+                            <p class="customer__adress">Adress '+ results.rows.item(i).street + " " + results.rows.item(i).city + '</p>\
+                            <p class="customer__birth">Birth: '+ results.rows.item(i).birth + '</p>\
+                            <p class="Customer__id">Customer ID: '+ results.rows.item(i).customer_id + '</p>\
+                            <p class="customer__details-btn">Details ></p>\
+                        </div>\
+                    </article>');
+
                     }
 
-                    $('.add-customer').bind('click', function (e) {
+                    $("#carRentalPage").css("display", "none");
+                    $("#customerListPage").css("display", "block");
 
-                        // rent cars
+                    $('.customer').bind('click', function (e) {
+
+                        // rent car
                         app.searchCustomerById(this.id);
-                        app.tempCustomerStorage(this.id);
+                        //app.tempCarStorage(this.id);
                     });
 
-                    let item = $(".add-customer");
+                    // let item = $(".add-customer");
 
-                    console.log(item.length);
-                    for (let i = 0; i < item.length; i++) {
+                    // console.log(item.length);
+                    // for (let i = 0; i < item.length; i++) {
 
-                        $(item[i]).bind('click', function (e) {
-                            console.log(this.id)
-                        });
-                    }
+                    //     $(item[i]).bind('click', function (e) {
+                    //         console.log(this.id)
+                    //     });
+                    // }
                 }, (err, errorStatement) => {
                     console.log(errorStatement);
                 });
@@ -351,26 +367,57 @@ $(function () {
             });
         }
 
-        app.searchCustomerById = function (id) {
+        app.searchCustomerById = function (id = null) {
 
-            var db = openDatabase('reservation.db', '1.1', 'description', 1 * 1024 * 1024)
+            var db = openDatabase('rentaltest1.db', '1.0', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
-                //select car data
+                //select customer
                 let sql = "SELECT * FROM Customers WHERE customer_id = '" + id + "';";
+                // selects latest added customer if value = null
+                if(id == null) sql = "SELECT * FROM Customers ORDER BY customer_id DESC LIMIT 1";
 
 
                 tx.executeSql(sql, [], function (tx, results) {
                     var len = results.rows.length;
-                    let msg = "<p> Car(s) found: " + len + "</p>";
+                    let msg = "<p> Customer(s) found: " + len + "</p>";
                     console.log(msg);
                     $("#chosenCustomer").val("");
+                    $("#addedCustomer").empty();
                     for (let i = 0; i < len; i++) {
                         //console.log(results.rows.item(i).make);
                         $("#chosenCustomer").val(results.rows.item(i).first_name + " " + results.rows.item(i).last_name + " " + results.rows.item(i).customer_id);
+                        $("#addedCustomer").append('\
+                        <article class="customer single-customer" id="'+ results.rows.item(i).customer_id + '">\
+                        <div class="customer-info">\
+                            <h2 class="customer__name">'+ results.rows.item(i).first_name + " " + results.rows.item(i).last_name + '</h2>\
+                            <p class="customer__adress">Adress '+ results.rows.item(i).street + " " + results.rows.item(i).city + '</p>\
+                            <p class="customer__birth">Birth: '+ results.rows.item(i).birth + '</p>\
+                            <p class="Customer__id">Customer ID: '+ results.rows.item(i).customer_id + '</p>\
+                        </div>\
+                    </article>');
                     }
                 }, null);
+
+
+                $("#carRentalPage").css("display", "block");
+                $("#customerListPage").css("display", "none");
             });
         }
+
+
+        app.getLatestCustomerId = function () {
+            let id;
+            let sql = "SELECT * FROM Customers ORDER BY customer_id DESC LIMIT 1";
+            var db = openDatabase('rentaltest1.db', '1.0', 'description', 1 * 1024 * 1024)
+            db.transaction(function (tx) {
+                tx.executeSql(sql, [], function (tx, results) {
+                    id = results.rows.item(0).customer_id;
+                    console.log(results.rows.item(0).customer_id);
+                });
+        });
+        return id;
+    }
+
         app.tempCustomerStorage = function (id) {
             var storage = window.localStorage;
             storage.setItem("id", id);
@@ -495,7 +542,7 @@ $(function () {
                     }
                     $(".rentCar").empty();
                     $(".rentCar").append('\
-                    <article class="car" id="'+ results.rows.item(0).registration + '">\
+                    <article class="car single-car" id="'+ results.rows.item(0).registration + '">\
                     <div class="car__info">\
                         <h2 class="car__info-header" id="car-name">'+ results.rows.item(0).make + " " + results.rows.item(0).model + '</h2>\
                         <p class="car__info-price" id="car-price">'+ results.rows.item(0).daily_rate + "€/day" + '</p>\
