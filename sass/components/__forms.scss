@@ -50,9 +50,9 @@ input{
 
 
 input{
-    background-color: #C4C4C4;
+    background-color: white;
     height: 25px;
-    color: #DBDBDB;
+    color: black;
     border: none;
 
 }
@@ -80,4 +80,12 @@ input{
 #remove{
     color: #3E3E3E;
     font-size: 11px;
+}
+
+.dropDown{
+    margin-right: 20px;
+    height: 25px;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
 }
