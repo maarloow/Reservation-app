@@ -20,11 +20,12 @@ $(function () {
                 $("#addCustomerPage").css("display", "block");
                 $("#carRentalPage").css("display", "none");
             });
-            $('#addCustomer').bind('click', function (e) {
+           // $('#addCustomer').bind('click', function (e) {
+                //console.log("add customer button triggered!")
                 // Get customer data when form is submitted successfully
                 $('#addCustomerForm').submit(function (e) {
                     e.preventDefault();
-
+                    
                     let newCustomer = customer(
                         $('#fName').val(),
                         $('#lName').val(),
@@ -38,10 +39,11 @@ $(function () {
                     $('#addCustomerForm')[0].reset();
                     $("#addCustomerPage").css("display", "none");
                     $("#carRentalPage").css("display", "block");
+                    console.log("add customer function next!");
                     app.addCustomer(newCustomer);
                     app.searchCustomerById();
                 });
-            });
+            //});
 
             $('#addCar').bind('click', function (e) {
 
@@ -236,6 +238,7 @@ $(function () {
                 + customer.email + "','"
                 + customer.phone + "');";
             console.log(sqlInsert);
+            if(customer.lastName != "" && customer.dateOfBirth !="" && customer.lastName !="" && customer.dateOfBirth !="" && customer.city !="" && customer.street !="" && customer.email !="" && customer.phone !=""){
             var db = openDatabase('rentaltest1.db', '1.0', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
                 //Insert customer data
@@ -244,6 +247,7 @@ $(function () {
                     //app.searchCustomerById(app.getLatestCustomerId());
                 }, (err, error) => console.log(error));
             });
+        }
         }
 
         app.addCar = function (car) {
