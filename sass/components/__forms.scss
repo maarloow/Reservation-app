@@ -3,23 +3,15 @@
     align-items: center;
      justify-content: space-between;
      font-weight: 200;
-     margin: 10px;
-     color: #DBDBDB;
+     margin-bottom: 10px;
+     color: white;
      font-size: 18px;
     }
     
     .form-group{
         margin-bottom: 30px;
     }
-    
-    .form-block__c input{
-       
-    }
-    
-    .form-block__c{
-        
-        
-    }
+
     .form-block__c-full{
         flex-grow: 1;
     }
@@ -38,10 +30,14 @@ input{
 
 }
 
+input::placeholder{
+    color: white;
+}
+
 
 .form{
     border: none;
-    background-color: #1262b5;
+    //background-color: #1262b5;
     border-radius: 10px;
     padding: 30px 20px;
 }
@@ -50,9 +46,9 @@ input{
 
 
 input{
-    background-color: #C4C4C4;
+    background-color: white;
     height: 25px;
-    color: #DBDBDB;
+    color: black;
     border: none;
 
 }
@@ -81,3 +77,38 @@ input{
     color: #3E3E3E;
     font-size: 11px;
 }
+
+.dropDown{
+    margin-right: 20px;
+    height: 25px;
+    border-radius: 5px;
+    background: none;
+    color: white;
+    option{
+        background-color: rgba(14, 74, 163, 0.7);
+    }
+}
+
+#apartmentRentalForm{
+    background: none;
+}
+
+input{
+    
+    //height: 25px;
+    color: white;
+    border: none;
+    background: none;
+    border-bottom: 1px solid;
+    border-radius: 0;
+}
+
+.apartmentRental .btn{
+    border: none;
+}
+
+.form-block-days{
+    font-size: 14px;
+    text-align: center;
+}
+

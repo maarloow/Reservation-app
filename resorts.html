@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+
+
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script src="js/jquery-1.9.1.min.js"></script>
+
+    <script src="app.js"></script>
+    <title>Car reservation app</title>
+</head>
+
+<body>
+    <div class="DEMO" id="resortListPage">
+        <div class="">
+            <div class="header">
+                <div class="top-bar">
+                    <a href="" class="back-btn">
+                        <img src="img/back-btn.svg" alt="" class="back-btn__icon">
+                    </a>
+                    <h1 class="page-header page-header-resort-list">Choose a resort</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="apartment-card">
+                    <div class="apartment-card__image-box">
+                    </div>
+                    <div class="apartment-card__info">
+                    <div class="apartment-card__header-box">
+                        <h2 class="apartment-card__header">
+                            Club Tropicana
+                        </h2>
+                    </div>
+                    <div class="apartment-card__location-box">
+                        <img src="img/pin.svg" class="apartment-card__icon" alt="">
+                        Valencia Complex, Gran Canaria
+                    </div>
+                    
+                    <div class="apartment-card__apartment-amount-box">
+                        <img src="img/door.svg" class="apartment-card__icon" alt="">
+
+                        45 Apartments
+                    </div>
+                </div>
+                </div>
+
+                <div class="apartment-card">
+                    <div class="apartment-card__image-box">
+                    </div>
+                    <div class="apartment-card__info">
+                    <div class="apartment-card__header-box">
+                        <h2 class="apartment-card__header">
+                            Club Tropicana
+                        </h2>
+                    </div>
+                    <div class="apartment-card__location-box">
+                        <img src="img/pin.svg" class="apartment-card__icon" alt="">
+                        Valencia Complex, Gran Canaria
+                    </div>
+                    
+                    <div class="apartment-card__apartment-amount-box">
+                        <img src="img/door.svg" class="apartment-card__icon" alt="">
+
+                        45 Apartments
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+
+</body>
+
+</html>

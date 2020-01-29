@@ -9,6 +9,9 @@
     margin-bottom: 5px;
 }
 
+.single-car{
+   // background: none;
+}
 .car__info{
     width: 40%;
     display: flex;
@@ -20,12 +23,12 @@
 .car__info-header{
     font-size: 25px;
     margin-bottom: 30px;
-    color: #D2C166;
+    color: #ffe000;
 }
 
 .car__info-price{
     font-size: 15px;
-    color: #DBDBDB;
+    color: white;
 }
 .car__image-box{
     height: 100%;

@@ -1,0 +1,107 @@
+[33mcommit db49b3f9c1671c3dc8be62938cc12aa6f6caa6d0[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Mon Jan 27 16:18:03 2020 +0200
+
+    started on apartment part
+
+[33mcommit 7a8489a800be8389b0d13cc2d5fe75dd806add49[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Mon Jan 27 15:45:08 2020 +0200
+
+    made the rental form work with the database
+
+[33mcommit b1303c070cb7659ac3a06ee72d5d9d8f959b623e[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Mon Jan 27 07:31:06 2020 +0200
+
+    css changes
+
+[33mcommit a81e52a3462f366547dac44eca33bc0123453898[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Sun Jan 26 19:06:30 2020 +0200
+
+    worked on customers page and fetching them from database
+
+[33mcommit e5c5e1d7e9fd0173e8e9b3ca7159d6f80186c13d[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Sat Jan 25 21:44:41 2020 +0200
+
+    updated css
+
+[33mcommit a80461ac05be7aa2b2e7fc604997255b3a598c4a[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Sat Jan 25 20:45:32 2020 +0200
+
+    fixed bug in rental form
+
+[33mcommit fa260a227301d045af79f663e41b325f9cd28918[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Sat Jan 25 20:35:33 2020 +0200
+
+    worked on rental form and database transaction
+
+[33mcommit 381b4e84cbbbad9a795bf46283a72e456a2ae45c[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Sat Jan 25 14:40:36 2020 +0200
+
+    added function for fetching car db table
+
+[33mcommit 5db297e2907e8df544306fc281ab9cc413040a30[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Sat Jan 25 13:21:05 2020 +0200
+
+    created rental database
+
+[33mcommit 0189582ae11c50a16be5537830c5711562a20833[m[33m ([m[1;31morigin/newstyle[m[33m)[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Fri Jan 24 09:33:37 2020 +0200
+
+    new styles
+
+[33mcommit c11a74961b21ee15ecf51a0797131bd564e33684[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Thu Jan 23 10:29:04 2020 +0200
+
+    Split css into sass files
+
+[33mcommit 344c5ee349ad4f0dc88e1c39537fa0ed6061d255[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Mon Jan 20 17:44:30 2020 +0200
+
+    added style to customer, car and reservation page
+
+[33mcommit 9c75d2afa1699b78bebd5eb103b5e501f816fc26[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Sat Jan 18 18:30:37 2020 +0200
+
+    added images
+
+[33mcommit 7d121ac4acdf1403ab5dc17ee1df018d94abd4d0[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Sat Jan 18 18:19:32 2020 +0200
+
+    styling added to front page
+
+[33mcommit 23aad08a22b57fcce4621f87f8f125deefa93f27[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Sat Jan 18 17:35:24 2020 +0200
+
+    styling added
+
+[33mcommit e4beebce9d75b38bfd05d53c3418dcf125783060[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Sat Jan 18 12:32:23 2020 +0200
+
+    title change again
+
+[33mcommit 1576790458cf104c9b65bb56496724f89de24b36[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Sat Jan 18 12:30:58 2020 +0200
+
+    title change
+
+[33mcommit ad9d5fdf1f6d721aa60291377ca84c4c9be91128[m
+Author: Robin Eriksson <eriksson_r@hotmail.com>
+Date:   Sat Jan 18 10:27:40 2020 +0200
+
+    first commit

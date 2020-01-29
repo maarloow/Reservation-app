@@ -12,7 +12,7 @@
 }
 
 .ui-dark-lens {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(14, 74, 163, 0.7);
   width: 100%;
   height: 100%;
 }
@@ -21,6 +21,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.ui-flex-direction-column {
+  flex-direction: column;
 }
 
 .car {
@@ -43,12 +47,12 @@
 .car__info-header {
   font-size: 25px;
   margin-bottom: 30px;
-  color: #D2C166;
+  color: #ffe000;
 }
 
 .car__info-price {
   font-size: 15px;
-  color: #DBDBDB;
+  color: white;
 }
 
 .car__image-box {
@@ -75,12 +79,15 @@
   padding: 0 20px;
   text-decoration: none;
   background-color: white;
-  border: 2px solid;
-  border-radius: 20px;
+  border: 1px solid;
   font-size: 40px;
   height: auto;
   background-color: transparent;
-  color: #DBDBDB;
+  color: white;
+}
+
+.btn-wide {
+  width: 100%;
 }
 
 .btn-form {
@@ -120,14 +127,30 @@
   background-image: url("../img/addCustomer.jpg");
 }
 
+#search-resort {
+  width: 90%;
+  height: 35px;
+  margin: 10px;
+  background-color: red;
+  color: white;
+  font-size: 15px;
+}
+
+#apartmentRentalForm .btn-form-apartment {
+  padding: 2px 20px;
+  font-weight: 100;
+  border: 1px solid white;
+  margin: 10px;
+}
+
 .form-block {
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: space-between;
   font-weight: 200;
-  margin: 10px;
-  color: #DBDBDB;
+  margin-bottom: 10px;
+  color: white;
   font-size: 18px;
 }
 
@@ -150,17 +173,20 @@ input {
   margin-right: 20px;
 }
 
+input::placeholder {
+  color: white;
+}
+
 .form {
   border: none;
-  background-color: #1262b5;
   border-radius: 10px;
   padding: 30px 20px;
 }
 
 input {
-  background-color: #C4C4C4;
+  background-color: white;
   height: 25px;
-  color: #DBDBDB;
+  color: black;
   border: none;
 }
 
@@ -185,6 +211,38 @@ input {
 #remove {
   color: #3E3E3E;
   font-size: 11px;
+}
+
+.dropDown {
+  margin-right: 20px;
+  height: 25px;
+  border-radius: 5px;
+  background: none;
+  color: white;
+}
+.dropDown option {
+  background-color: rgba(14, 74, 163, 0.7);
+}
+
+#apartmentRentalForm {
+  background: none;
+}
+
+input {
+  color: white;
+  border: none;
+  background: none;
+  border-bottom: 1px solid;
+  border-radius: 0;
+}
+
+.apartmentRental .btn {
+  border: none;
+}
+
+.form-block-days {
+  font-size: 14px;
+  text-align: center;
 }
 
 #table-customers {
@@ -249,7 +307,7 @@ input {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: rgba(18, 98, 181, 0.8);
+  background-color: rgba(14, 74, 163, 0.7);
   width: 100%;
   height: 100%;
 }
@@ -290,19 +348,16 @@ input {
 }
 
 .page-header {
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.page-header {
   margin: 0;
   border: 0;
-  font-size: 27px;
-  font-weight: bold;
+  font-size: 20px;
   text-align: center;
-  color: #D2C166;
+  color: white;
   margin: 10px;
+}
+
+.page-header-resort-list, .page-header-car-list {
+  color: black;
 }
 
 .back-btn {
@@ -373,6 +428,61 @@ input {
   top: 10px;
   right: 10px;
   font-size: 17px;
+}
+
+.apartment-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  box-shadow: 1px 10px 8px #888888;
+  margin-bottom: 20px;
+}
+.apartment-card__image-box {
+  height: 150px;
+  background-image: url("../img/demo-resort.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.apartment-card__room-image-box {
+  height: 180px;
+  background-image: url("../img/demo-apartment.jpg");
+}
+.apartment-card__box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.apartment-card__resort-details-box {
+  border: 1px solid black;
+  padding: 2px 10px;
+}
+.apartment-card__info {
+  padding: 10px;
+}
+.apartment-card__icon {
+  height: 15px;
+  margin-right: 5px;
+}
+.apartment-card__location-box, .apartment-card__apartment-amount-box {
+  display: flex;
+  align-items: center;
+}
+.apartment-card__button-box {
+  position: relative;
+}
+.apartment-card__btn {
+  background-color: rgba(14, 74, 163, 0.7);
+  color: white;
+  font-size: 18px;
+  padding: 6px 20px;
+  height: auto;
+}
+.apartment-card__apartment-beds {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /*
@@ -462,6 +572,7 @@ body {
 }
 h1, h2, h3, h4, p {
   margin: 0;
+  font-weight: 100;
 }
 
 h1 {
@@ -471,6 +582,12 @@ h1 {
   overflow: visible;
   padding: 0px;
   text-align: center;
+}
+
+h2 {
+  font-size: 25px;
+  margin: 0;
+  font-weight: 100;
 }
 
 .event {
@@ -529,6 +646,30 @@ h1 {
 
 #carListPage, #customerListPage, #addCustomerPage {
   display: none;
+}
+
+#apartmentRentalPage, #carRentalPage, #addCustomerPage, #addCarPage {
+  background-image: url(../img/appRentalBg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#carRentalPage {
+  background-image: url(../img/tesla-bg.jpg);
+}
+
+#addCustomerPage {
+  background-image: url(../img/car-customer.jpg);
+}
+
+#addCarPage {
+  background-image: url(../img/add-car-bg2.jpg);
+}
+
+.DEMO {
+  height: 100vh;
 }
 
 /*# sourceMappingURL=index.css.map */

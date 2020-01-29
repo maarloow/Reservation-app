@@ -44,28 +44,34 @@ $(function () {
                     app.searchCustomerById();
                 });
             //});
-
-            $('#addCar').bind('click', function (e) {
-
+            
+         
                 // Get car data when form is submitted successfully
-                $('#carForm').submit(function (e) {
+                $('addCar').bind('click', function(e){
+                    console.log("submit clicked");
+
+                
+                
+                    console.log("submit clicked");
                     e.preventDefault();
 
                     let newCar = car(
                         $('#registration').val(),
                         $('#make').val(),
                         $('#model').val(),
-                        $('#engineSize').val(),
+                        $('#engine').val(),
                         $('#color').val(),
-                        $('#numberOfSeats').val(),
-                        $('#numberOfDoors').val(),
-                        $('#dailyRate').val(),
-                        $('#imageSide').val(),
-                        $('#imageFront').val()
+                        $('#seats').val(),
+                        $('#doors').val(),
+                        $('#rate').val(),
+                        $('#image-side').val(),
+                        $('#image-front').val(),
+                        $('#transmission').val(),
+                        $('#fuel').val()
                     );
                     console.log(newCar);
                     app.addCar(newCar);
-                });
+               
             });
 
             $('#search_customer-btn').bind('click', function (e) {
@@ -77,11 +83,32 @@ $(function () {
             });
 
             $('#search_car-btn').bind('click', function (e) {
-
+                if($('#fromDate').val() != "" && $('#toDate').val() && $('#fromDate').val() < $('#toDate').val())
+                {
                 // search for cars in database
                 let searchQuery = $('#carName').val();
+                let from_date = $('#fromDate').val();
+                let to_date = $('#toDate').val();
                 console.log(searchQuery);
-                app.searchCar(searchQuery);
+                app.searchCar(searchQuery, from_date, to_date);
+                }
+                else if($('#fromDate').val() > $('#toDate').val()){
+                    navigator.notification.alert(
+                        'Your "from" date can not be set later than your "to" date!',  // message
+                        null,         // callback
+                        'Error',            // title
+                        'OK'                  // buttonName
+                    );
+                }
+                else{
+                    
+                    navigator.notification.alert(
+                        'Set reservation dates first!',  // message
+                        null,         // callback
+                        'Error',            // title
+                        'OK'                  // buttonName
+                    );
+                }
             });
 
             $(".readonly").keydown(function (e) {
@@ -113,6 +140,14 @@ $(function () {
                 $("#page1").css("display", "block");
             });
 
+            $(".backToRentalForm").bind('click', function (e) {
+                $("#addCustomerPage").css("display", "none");
+                $("#carListPage").css("display", "none");
+                $("#customerListPage").css("display", "none");
+                $("#carRentalPage").css('display', 'block');
+
+            });
+
             $("#button-page2").bind('click', function (e) {
                 app.hideAllPages();
                 $("#page2").css("display", "block");
@@ -129,6 +164,8 @@ $(function () {
             });
 
         };
+
+        
 
         app.db = function () {
 
@@ -204,8 +241,10 @@ $(function () {
 
                             tx.executeSql(sqlCreateReservationTable, [], () => {
                         
-                                tx.executeSql("INSERT INTO Car_Reservation VALUES (null,'1','RTF-852','2020-03-03','2020-03-05','200');");
-        
+                                tx.executeSql("INSERT INTO Car_Reservation VALUES (null,'1','RTF-852','2020-01-01','2020-03-05','200');");
+                                tx.executeSql("INSERT INTO Car_Reservation VALUES (null,'1','RTF-854','2020-01-01','2020-03-05','200');");
+                                tx.executeSql("INSERT INTO Car_Reservation VALUES (null,'1','RTF-857','2020-02-02','2020-03-03','200');");
+
                             }, (err, error) => {
                                 console.log(error);
                                 console.log(err);
@@ -262,7 +301,9 @@ $(function () {
                 + car.numberOfDoors + "','"
                 + car.dailyRate + "','"
                 + car.imageSide + "','"
-                + car.imageFront + "');"
+                + car.imageFront + "','"
+                + car.transmission + "','"
+                + car.fuel + "');"
 
             console.log(sqlInsert, [], () => console.log("Car inserted to DB"), (err, error) => console.log(error));
             var db = openDatabase('rentaltest1.db', '1.0', 'description', 1 * 1024 * 1024)
@@ -427,13 +468,26 @@ $(function () {
             storage.setItem("id", id);
         }
         /////////////////////////////////////
-        app.searchCar = function (searchQuery) {
+        app.searchCar = function (searchQuery, from_date, to_date) {
+
+
+/////////   SQL query that select all cars that are free on the selected time frame 
+            let sqlAvailableCars = "Select * \
+FROM Cars \
+WHERE registration NOT IN \
+(\
+Select car_registration FROM Car_Reservation \
+WHERE ('" + from_date + "' >= from_date AND '"+ from_date +"' < to_date) \
+OR ('"+ to_date +"' > from_date AND '"+ to_date +"' >= to_date)\
+);"
+
+
             var db = openDatabase('rentaltest1.db', '1.0', 'description', 1 * 1024 * 1024)
             db.transaction(function (tx) {
                 //select car data
                 let sql = "SELECT * FROM Cars WHERE make LIKE '%" + searchQuery + "%' OR model LIKE '%" + searchQuery + "%';";
-                console.log(sql);
-                tx.executeSql(sql, [], function (tx, results) {
+                console.log(sqlAvailableCars);
+                tx.executeSql(sqlAvailableCars, [], function (tx, results) {
                     var len = results.rows.length;
                     // let msg = "<p> Car(s) found: " + len + "</p>";
                     console.log(results);
@@ -469,59 +523,6 @@ $(function () {
                         //app.tempCarStorage(this.id);
                     });
 
-                    //     console.log(msg);
-                    //     $("#carResultRows").empty();
-                    //     $("#carResultRows").append(msg);
-                    //     $("#carTable").empty();
-                    //     $("#carTable").append("<table data-role='table' id='table-cars' data-mode='columntoggle'\
-                    //             class='ui-responsive table-stroke'>\
-                    //             <thead>\
-                    //             <tr>\
-                    //                 <th data-priority='2' >Car</th>\
-                    //                 <th data-priority='3'>Daily rate</th>\
-                    //                 <th data-priority='4'>Seating</th>\
-                    //                 <th data-priority='5'>Doors</th>\
-                    //                 <th data-priority='6'>Reg</th>\
-                    //             </tr>\
-                    //         </thead>\
-                    //         <tbody id='table-car__rows'>\
-                    //         </tbody>\
-                    //         </table>");
-
-
-                    //     for (let i = 0; i < len; i++) {
-                    //         console.log(results.rows.item(i).make);
-                    //         $("#table-car__rows").append("\
-                    //             <tr class='add-car' id="+ results.rows.item(i).registration + ">\
-                    //             <td>"+ results.rows.item(i).make + " " + results.rows.item(i).model + "</td>\
-                    //             <td >"+ results.rows.item(i).daily_rate + "</td>\
-                    //             <td >"+ results.rows.item(i).number_of_seats + "</td>\
-                    //             <td >"+ results.rows.item(i).number_of_doors + "</td>\
-                    //             <td >"+ results.rows.item(i).registration + "</td>\
-                    //           </tr>");
-                    //     }
-
-                    //     $('.add-car').bind('click', function (e) {
-
-                    //         // rent car
-
-
-                    //         app.searchCarByReg(this.id);
-                    //         app.tempCarStorage(this.id);
-                    //     });
-
-                    //     let item = $(".add-car");
-
-                    //     console.log(item.length);
-                    //     for (let i = 0; i < item.length; i++) {
-
-                    //         $(item[i]).bind('click', function (e) {
-                    //             console.log(this.id)
-                    //         });
-
-                    //     }
-                    // }, (err, errorStatement) => {
-                    //     console.log(errorStatement);
                 });
 
             });

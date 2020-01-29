@@ -20,6 +20,21 @@ CREATE TABLE Customers (\
     email TEXT NOT NULL\
 );
 
+Select * 
+FROM Cars
+WHERE registration NOT IN
+(
+Select car_registration FROM Car_Reservation 
+WHERE fromV < from_date AND toV < from_date 
+OR fromV > to_date AND toV > to_date;
+)
+
+Select * from Cars WHERE registration = ?;
+
+Select car_registration FROM Car_Reservation 
+WHERE fromV < from_date AND toV < from_date 
+OR fromV > to_date AND toV > to_date;
+
 INSERT INTO Customers VALUES ('NULL','Kalle','Persson','1991-04-04','Vasa','Vasaesplanaden 21','0405251267','Kalle@m.fi');
 INSERT INTO Customers VALUES ('NULL','Ville','Holm','1992-08-04','Åbo','Götagatan 22','0409856237','Ville@m.fi');
 INSERT INTO Customers VALUES ('NULL','Dal','Kvist','1981-06-04','Åbo','Strandgatan 20','0409851467','Dal@m.fi');

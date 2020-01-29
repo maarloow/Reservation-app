@@ -1,4 +1,5 @@
 
+
 function customer(firstName, lastName, dateOfBirth, city, street, phone, email) {
     let customer = {
     firstName: firstName,
@@ -13,7 +14,7 @@ function customer(firstName, lastName, dateOfBirth, city, street, phone, email) 
   return customer;
 }
 
-function car(registration, make, model, engineSize, color, numberOfSeats, numberOfDoors, dailyRate, imageSide, imageFront) {
+function car(registration, make, model, engineSize, color, numberOfSeats, numberOfDoors, dailyRate, imageSide, imageFront, transmission, fuel) {
     let car = {
         registration : registration,
         make : make,
@@ -24,7 +25,9 @@ function car(registration, make, model, engineSize, color, numberOfSeats, number
         numberOfDoors : numberOfDoors,
         dailyRate : dailyRate,
         imageSide : imageSide,
-        imageFront : imageFront
+        imageFront : imageFront,
+        transmission : transmission,
+        fuel : fuel
     };
   return car;
 }
