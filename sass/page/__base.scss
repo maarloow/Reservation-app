@@ -76,6 +76,7 @@ body{
 }
 h1,h2,h3,h4,p{
     margin: 0;
+    font-weight: 100;
 }
 
 h1 {
@@ -85,6 +86,12 @@ h1 {
     overflow:visible;
     padding:0px;
     text-align:center;
+}
+
+h2 {
+    font-size: 25px;
+    margin: 0;
+    font-weight: 100;
 }
 
 .event {
@@ -136,4 +143,16 @@ h1 {
 
 #carListPage, #customerListPage, #addCustomerPage{
     display: none;
+}
+
+#apartmentRentalPage{
+    background-image: (url(../img/appRentalBg.jpg));
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.DEMO{
+    height: 100vh;
 }

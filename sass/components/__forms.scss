@@ -3,7 +3,7 @@
     align-items: center;
      justify-content: space-between;
      font-weight: 200;
-     margin: 10px;
+     margin-bottom: 10px;
      color: #DBDBDB;
      font-size: 18px;
     }
@@ -89,3 +89,27 @@ input{
     background-color: white;
     color: black;
 }
+
+#apartmentRentalForm{
+    background: none;
+}
+
+.apartmentRental input{
+    
+    //height: 25px;
+    color: white;
+    border: none;
+    background: none;
+    border-bottom: 1px solid;
+    border-radius: 0;
+}
+
+.apartmentRental .btn{
+    border: none;
+}
+
+.form-block-days{
+    font-size: 14px;
+    text-align: center;
+}
+
